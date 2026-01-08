@@ -22,7 +22,7 @@
 **方式一：URL 导入（推荐）**
 - 在 Quantumult X 中打开设置 → 配置文件
 - 点击「下载」
-- 粘贴配置文件的 Raw 链接或本地路径
+- 粘贴配置文件的 Raw 链接或本地路径 [长按复制连接](https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/profile/QX_Config.conf)
 - 确认下载并应用
 
 **方式二：手动导入**
