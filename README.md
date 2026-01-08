@@ -20,22 +20,17 @@
 ### 1. 导入配置文件
 
 **方式一：URL 导入（推荐）**
-- 在 Quantumult X 中打开设置 → 配置文件
-- 点击「下载」
+- 在 Quantumult X 中点击右下角图标
+- 点击「下载配置」
 - 粘贴配置文件的 Raw 链接或本地路径 [长按复制连接](https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/profile/QX_Config.conf)
-- 确认下载并应用
+- 点击「下载」并保存
 
 **方式二：手动导入**
 - 复制 [profile/QX_Config.conf](profile/QX_Config.conf) 的完整内容
-- 在 Quantumult X 中粘贴至相应配置栏
-- 保存并应用
+- 在 Quantumult X 中点击右下角图标
+- 点击「编辑」
+- 粘贴内容并保存
 
-### 2. 配置订阅地址
-
-编辑导入的配置文件，根据需要修改或添加：
-- 节点订阅地址
-- 分流规则订阅
-- 重写规则订阅
 
 
 ## ⚠️ 重要声明
