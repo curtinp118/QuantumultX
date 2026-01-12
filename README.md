@@ -1,57 +1,83 @@
+
 # Quantumult X 个人配置库
 
-为 Quantumult X 提供优化配置、分流规则和实用脚本的个人仓库。提供开箱即用的配置方案，同时支持灵活的自定义修改。
+本仓库为 Quantumult X 提供优化配置、分流规则及实用脚本，支持开箱即用与灵活自定义，助力提升网络体验。
+
 
 ## 📋 项目结构
 
-- **[profile/](profile/)** - 核心配置文件
-  - `QX_Config.conf` - 完整的 Quantumult X 配置模板，包含通用设置、DNS 配置和策略组定义
-  
-- **[scripts/](scripts/)** - 实用脚本集合
-  - 各类应用辅助脚本，如广告拦截、功能增强等
+- **profile/**：核心配置文件
+  - `QX_Config.conf`：完整配置模板，涵盖通用设置、DNS、策略组等
+- **scripts/**：实用脚本集合
+  - 包含广告拦截、功能增强等辅助脚本
+- **rewrite/**：重写规则目录
+  - 各类应用的重写规则文件
+- **rules/**：分流规则目录
+  - 各类分流规则文件
 
-- **[rewrite/](rewrite/)** - 重写规则目录
-    - 各类应用的重写规则文件
-- **[rules/](rules/)** - 分流规则目录
-    - 各类分流规则文件
+
+## 👀 配置预览
+
+以下为 Quantumult X 配置界面预览：
+
+![配置预览1](icons/homepage.jpeg)
+![配置预览2](icons/homepage2.jpeg)
+
+---
+
 
 ## 🚀 快速开始
 
 ### 1. 导入配置文件
 
 **方式一：URL 导入（推荐）**
-- 在 Quantumult X 中点击右下角图标
-- 点击「下载配置」
-- 粘贴配置文件的 Raw 链接或本地路径 [长按复制连接](https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/profile/QX_Config.conf)
-- 点击「下载」并保存
+1. 打开 Quantumult X，点击右下角图标
+2. 选择「下载配置」
+3. 粘贴配置文件 Raw 链接或本地路径：[长按复制连接](https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/profile/QX_Config.conf)
+4. 点击「下载」并保存
 
 **方式二：手动导入**
-- 复制 [profile/QX_Config.conf](profile/QX_Config.conf) 的完整内容
-- 在 Quantumult X 中点击右下角图标
-- 点击「编辑」
-- 粘贴内容并保存
+1. 复制 [profile/QX_Config.conf](profile/QX_Config.conf) 的完整内容
+2. 在 Quantumult X 中点击右下角图标
+3. 选择「编辑」
+4. 粘贴内容并保存
+
 
 
 
 ## ⚠️ 重要声明
 
-- 本仓库包含的部分脚本用于修改应用响应数据，**仅供个人学习和测试使用**
-- 使用这些脚本可能违反相关应用的服务条款，**使用者需自行承担所有法律责任**
-- 不建议在生产环境或关键账户上使用这些脚本
-- 作者不对使用本仓库资源所产生的任何后果负责
+- 部分脚本用于修改应用响应数据，仅供个人学习和测试
+- 使用这些脚本可能违反相关应用服务条款，风险自担
+- 不建议在生产环境或关键账户使用
+- 作者不对使用本仓库资源产生的任何后果负责
+
 
 
 ## 🤝 使用建议
 
-- 定期检查配置文件和脚本的更新
+- 定期检查配置文件和脚本更新
 - 根据实际网络环境调整 DNS 服务器和节点选择
-- 谨慎启用修改响应的脚本，避免影响账户安全
-- 在更新前备份现有配置
+- 谨慎启用修改响应脚本，注意账户安全
+- 更新前请备份现有配置
+
+
+
+## 🙏 鸣谢与引用
+
+本项目部分规则及脚本引用自以下优秀作者及社区：
+
+- **分流规则作者**：blackmatrix7
+- **资源解析与脚本**：KOP-XIAO
+- **广告拦截规则**：墨鱼去广告（chxm1023）、ddgksf2013
+- **图标与其他资源**：Koolson、fmz200、xream 
+
+感谢以上作者及社区的无私分享与贡献！
 
 ## 📄 许可证
 
-本项目采用 [GNU General Public License v3.0](LICENSE) 许可证。详见 [LICENSE](LICENSE) 文件。
+本项目采用 [GNU General Public License v3.0](LICENSE) 许可证，详见 [LICENSE](LICENSE) 文件。
 
 ---
 
-**最后更新：2026年1月8日**
+> **最后更新：2026年1月12日**
