@@ -20,8 +20,11 @@
 
 以下为 Quantumult X 配置界面预览：
 
-![配置预览1](icons/homepage.jpeg)
-![配置预览2](icons/homepage2.jpeg)
+<div style="display: flex; gap: 12px;">
+  <img src="icons/homepage.jpeg" alt="配置预览1" width="250" />
+  <img src="icons/homepage2.jpeg" alt="配置预览2" width="250" />
+  <img src="icons/homepage3.jpeg" alt="配置预览3" width="250" />
+</div>
 
 ---
 
