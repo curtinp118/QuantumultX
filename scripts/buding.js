@@ -3,7 +3,7 @@
 更新时间：2024-06-08
 *******************************
 [rewrite_local]
-^https:\/\/screen-lock\.sm-check\.com\/ url script-response-body https://raw.githubusercontent.com/Curtinp/QuantumultX/main/Rewrite/buding.js
+^https:\/\/screen-lock\.sm-check\.com\/ url script-response-body https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/buding.js
 [mitm] 
 hostname = screen-lock.sm-check.com
 *******************************/

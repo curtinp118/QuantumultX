@@ -1,14 +1,13 @@
-/*
-
-dreamface 3.0.0
-
+/******************************
+脚本功能：dreamface 3.0.0-解锁会员
+更新时间：2024-06-08
+*******************************
 [rewrite_local]
-https://www.dreamfaceapp.com/df-server/user/save_user_login url script-response-body https://raw.githubusercontent.com/Curtinp/QuantumultX/main/Rewrite/dreamface.js
+https://www.dreamfaceapp.com/df-server/user/save_user_login url script-response-body https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/dreamface.js
 
 [mitm]
 hostname = www.dreamfaceapp.com
-
-*/
+*******************************/
 var objc = JSON.parse($response.body);
 
     objc = {

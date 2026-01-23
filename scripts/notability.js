@@ -1,17 +1,13 @@
-/*************************************
-
-项目名称：Notability
-
-
-**************************************
-
+/******************************
+脚本功能：Notability-解锁会员
+更新时间：2024-06-08
+*******************************
 [rewrite_local]
-^https?:\/\/notability\.com\/(global|subscriptions) url script-response-body https://raw.githubusercontent.com/curtin110/QuantumultX/refs/heads/main/Rewrite/notability.js
+^https?:\/\/notability\.com\/(global|subscriptions) url script-response-body https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/notability.js
 
 [mitm]
 hostname = notability.com
-
-*************************************/
+*******************************/
 
 
 var chxm1023 = JSON.parse($response.body);
