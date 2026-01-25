@@ -2,7 +2,7 @@
 /******************************
 脚本功能：成都地铁签到(积分)
 更新时间：2026-01-25
-说明：先用 rewrite 抓取请求头(自动去敏)，再用 task 定时签到
+说明：打开成都地铁-我的-会员中心 点击签到按钮 手动签到一次 脚本将自动保存用户信息
 *******************************
 [rewrite_local]
 ^https:\/\/app\.cdmetro\.chengdurail\.cn\/platform\/users\/user\/sign-in-integral(-day)?(\\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/CDRail.js
@@ -72,7 +72,7 @@ if (isGetHeader) {
     $notify(
       ok ? "成都地铁 Headers 获取成功" : "成都地铁 Headers 保存失败",
       "",
-      ok ? "已保存请求头，后续将用于自动签到。" : "保存失败：写入本地存储失败，请检查 Quantumult X 配置。"
+      ok ? "已保存用户信息后续将用于自动签到。" : "保存失败：写入本地存储失败，请检查 Quantumult X 配置。"
     );
     $done({});
   }
