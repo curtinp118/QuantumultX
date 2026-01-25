@@ -70,7 +70,7 @@ if (isGetHeader) {
       JSON.stringify(picked)
     );
     $notify(
-      ok ? "成都地铁 Headers 获取成功" : "成都地铁 Headers 保存失败",
+      ok ? "成都地铁 户信息 获取成功" : "成都地铁 Headers 保存失败",
       "",
       ok ? "已保存用户信息后续将用于自动签到。" : "保存失败：写入本地存储失败，请检查 Quantumult X 配置。"
     );
