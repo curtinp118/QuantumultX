@@ -5,7 +5,7 @@
 说明：先用 rewrite 抓取请求头(自动去敏)，再用 task 定时签到
 *******************************
 [rewrite_local]
-^https:\/\/app\.cdmetro\.chengdurail\.cn\/platform\/users\/user\/info(\\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/CDRail.js
+^https:\/\/app\.cdmetro\.chengdurail\.cn\/platform\/users\/user\/sign-in-integral(-day)?(\\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/CDRail.js
 
 [task_local]
 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/CDRail.js, tag=成都地铁签到, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/doraemon/Doraemon-1022.png, enabled=true
@@ -57,7 +57,7 @@ if (isGetHeader) {
 
   if (!picked || Object.keys(picked).length === 0) {
     console.log("[CDRail] picked headers empty:", JSON.stringify(allHeaders));
-    $notify("成都地铁 Headers 获取失败", "", "未获取到指定请求头，请重新触发一次 user/info 抓包 URL。");
+    $notify("成都地铁 Headers 获取失败", "", "未获取到指定请求头，请重新触发一次 sign-in-integral 或 sign-in-integral-day 抓包 URL。");
     $done({});
   } else {
     const ok = $prefs.setValueForKey(JSON.stringify(picked), CD_HEADER_KEY);
@@ -75,7 +75,7 @@ if (isGetHeader) {
 } else {
   const raw = $prefs.valueForKey(CD_HEADER_KEY);
   if (!raw) {
-    $notify("成都地铁签到结果", "无法签到", "本地没有已保存的请求头，请先抓包访问一次 user/info 接口。");
+    $notify("成都地铁签到结果", "无法签到", "本地没有已保存的请求头，请先抓包访问一次 sign-in-integral 或 sign-in-integral-day 接口。");
     return $done();
   }
 
