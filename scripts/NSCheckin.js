@@ -6,7 +6,7 @@
 ^https:\/\/www\.nodeseek\.com\/api\/account\/getInfo\/\d+\?readme=1$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NSCheckin.js
 
 [task_local]
-10 8 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NSCheckin.js, tag=NS签到, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/shutiao.png, enabled=true
+30 8 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NSCheckin.js, tag=NS签到, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/shutiao.png, enabled=true
 
 [MITM]
 hostname = www.nodeseek.com
