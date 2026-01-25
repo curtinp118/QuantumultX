@@ -57,7 +57,11 @@ if (isGetHeader) {
 
   if (!picked || Object.keys(picked).length === 0) {
     console.log("[CDRail] picked headers empty:", JSON.stringify(allHeaders));
-    $notify("成都地铁 Headers 获取失败", "", "未获取到指定请求头，请重新触发一次 sign-in-integral 或 sign-in-integral-day 抓包 URL。");
+    $notify(
+      "成都地铁",
+      "未抓到请求头",
+      "请在 App 内打开签到页，触发一次 sign-in-integral(-day) 请求后再试。"
+    );
     $done({});
   } else {
     const ok = $prefs.setValueForKey(JSON.stringify(picked), CD_HEADER_KEY);
@@ -68,14 +72,18 @@ if (isGetHeader) {
     $notify(
       ok ? "成都地铁 Headers 获取成功" : "成都地铁 Headers 保存失败",
       "",
-      ok ? "指定请求头已持久化保存(已去除脚本内明文敏感信息)。" : "写入持久化存储失败，请检查配置。"
+      ok ? "已保存请求头，后续将用于自动签到。" : "保存失败：写入本地存储失败，请检查 Quantumult X 配置。"
     );
     $done({});
   }
 } else {
   const raw = $prefs.valueForKey(CD_HEADER_KEY);
   if (!raw) {
-    $notify("成都地铁签到结果", "无法签到", "本地没有已保存的请求头，请先抓包访问一次 sign-in-integral 或 sign-in-integral-day 接口。");
+    $notify(
+      "成都地铁",
+      "缺少请求头",
+      "请先抓包：在 App 内触发一次 sign-in-integral(-day) 请求，用于保存登录信息。"
+    );
     return $done();
   }
 
@@ -84,7 +92,7 @@ if (isGetHeader) {
     savedHeaders = JSON.parse(raw) || {};
   } catch (e) {
     console.log("[CDRail] parse saved headers failed:", e);
-    $notify("成都地铁签到结果", "无法签到", "本地保存的请求头数据损坏，请重新抓包一次。");
+    $notify("成都地铁", "请求头异常", "已保存的请求头解析失败，请重新抓包保存。");
     return $done();
   }
 
@@ -148,22 +156,22 @@ if (isGetHeader) {
 
       if (status === 401 || status === 403) {
         const content = msg || body || `鉴权失败，status=${status}`;
-        $notify("成都地铁签到结果", `${status} 需要重新抓包`, content);
+        $notify("成都地铁", "登录失效", `HTTP ${status}，请重新抓包保存请求头。\n${content}`);
       } else if (status >= 200 && status < 300) {
         if (code === "0" && (msg === "SUCCESS" || msg === "")) {
           const inc =
             integralIncrement !== undefined ? String(integralIncrement) : "";
           const content = inc ? `获得积分 +${inc}` : "签到成功";
-          $notify("成都地铁签到结果", "签到成功", content);
+          $notify("成都地铁", "签到成功", content);
         } else if (code === "1102") {
-          $notify("成都地铁签到结果", "重复签到", msg || "请勿重复签到！");
+          $notify("成都地铁", "今日已签到", msg || "请勿重复签到！");
         } else {
           const content = `${msg || "未知返回"}${code ? ` (code=${code})` : ""}`;
-          $notify("成都地铁签到结果", "签到返回异常", content);
+          $notify("成都地铁", "返回异常", content);
         }
       } else {
         const content = msg || body || `请求失败，status=${status}`;
-        $notify("成都地铁签到结果", `请求异常 ${status}`, content);
+        $notify("成都地铁", `接口异常 ${status}`, content);
       }
 
       $done();
@@ -171,7 +179,7 @@ if (isGetHeader) {
     (reason) => {
       const err = reason?.error ? String(reason.error) : String(reason || "");
       console.log(`[CDRail] request error: ${err}`);
-      $notify("成都地铁签到结果", "请求错误", err);
+      $notify("成都地铁", "网络错误", err);
       $done();
     }
   );
