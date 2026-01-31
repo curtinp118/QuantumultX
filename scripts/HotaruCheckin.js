@@ -4,7 +4,7 @@
 使用说明：先抓包一次保存 Cookie，再由定时任务自动签到。
 
 [rewrite_local]
-^https:\/\/api\.hotaruapi\.top\/api\/user\/checkin$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/HotaruCheckin.js
+^https:\/\/api\.hotaruapi\.top\/api\/user\/self$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/HotaruCheckin.js
 
 [task_local]
 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/HotaruCheckin.js, tag=HotaruAPI签到, enabled=true
@@ -54,11 +54,11 @@ if (isGetHeader) {
 
   if (!picked || !picked.Cookie || !picked["new-api-user"]) {
     console.log("[HotaruCheckin] header capture failed:", JSON.stringify(allHeaders));
-    $notify(
-      "HotaruAPI",
-      "未抓到关键信息",
-      "请在触发 /api/user/checkin 请求时抓包（需要包含 Cookie 和 new-api-user）。"
-    );
+  $notify(
+    "HotaruAPI",
+    "未抓到关键信息",
+    "请在触发 /api/user/self 请求时抓包（需要包含 Cookie 和 new-api-user）。"
+  );
     $done({});
   }
 
@@ -72,7 +72,7 @@ if (isGetHeader) {
 } else {
   const raw = $prefs.valueForKey(HOTARU_HEADER_KEY);
   if (!raw) {
-    $notify("HotaruAPI", "缺少参数", "请先抓包保存一次 /api/user/checkin 的请求头。");
+    $notify("HotaruAPI", "缺少参数", "请先抓包保存一次 /api/user/self 的请求头。");
     return $done();
   }
 
