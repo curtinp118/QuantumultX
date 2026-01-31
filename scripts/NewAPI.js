@@ -1,16 +1,16 @@
 /******************************
-脚本功能：通用签到（HotaruAPI / KFC-API 等同一套源码站点）
+脚本功能：通用签到（HotaruAPI / KFC-API 等同套NewAPI源码站点）
 更新时间：2026-01-31
 使用说明：先抓包一次保存 Cookie，再由定时任务自动签到（按域名分别保存，多站点可共用同一脚本）。
 
 [rewrite_local]
-^https:\/\/(api\.hotaruapi\.top|kfc-api\.sxxe\.net)\/api\/user\/self$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/HotaruCheckin.js
+^https:\/\/(api\.hotaruapi\.top|kfc-api\.sxxe\.net)\/api\/user\/self$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js
 
 [task_local]
-10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/HotaruCheckin.js, tag=通用签到(Hotaru/KFC), enabled=true
+10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=通用签到(Hotaru/KFC), enabled=true
 ; 如需只跑单站点（可选）
-; 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/HotaruCheckin.js, tag=Hotaru签到, enabled=true, argument=host=api.hotaruapi.top
-; 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/HotaruCheckin.js, tag=KFC签到, enabled=true, argument=host=kfc-api.sxxe.net
+; 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=Hotaru签到, enabled=true, argument=host=api.hotaruapi.top
+; 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=KFC签到, enabled=true, argument=host=kfc-api.sxxe.net
 
 [MITM]
 hostname = api.hotaruapi.top, kfc-api.sxxe.net
