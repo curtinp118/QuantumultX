@@ -4,7 +4,7 @@
 使用说明：先抓包一次保存 Cookie，再由定时任务自动签到（按域名分别保存，多站点可共用同一脚本）。
 
 [rewrite_local]
-^https:\/\/(hotaruapi\.com|kfc-api\.sxxe\.net)\/api\/user\/self\/?(?:\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js
+^https:\/\/(hotaruapi\.com|kfc-api\.sxxe\.net)\/api\/user\/self$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js
 
 [task_local]
 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=通用签到(Hotaru/KFC), enabled=true
@@ -99,8 +99,6 @@ function refererFromHost(host) {
 
 function notifyTitleForHost(host) {
   if (host === "hotaruapi.com") return "HotaruAPI";
-  // backward compatibility
-  if (host === "api.hotaruapi.top") return "HotaruAPI";
   if (host === "kfc-api.sxxe.net") return "KFC-API";
   return host;
 }
