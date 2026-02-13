@@ -4,7 +4,7 @@
 使用说明：先抓包一次保存 Cookie，再由定时任务自动签到（按域名分别保存，多站点可共用同一脚本）。
 
 [rewrite_local]
-^https:\/\/(hotaruapi\.com|kfc-api\.sxxe\.net)\/console\/personal\/?(?:\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js
+^https:\/\/(hotaruapi\.com|kfc-api\.sxxe\.net)\/api\/user\/self\/?(?:\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js
 
 [task_local]
 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=通用签到(Hotaru/KFC), enabled=true
@@ -115,7 +115,7 @@ if (isGetHeader) {
     $notify(
       "通用签到",
       "未抓到关键信息",
-      "请在触发 /console/personal 请求时抓包（需要包含 Cookie 和 new-api-user）。"
+      "请在触发 /api/user/self 请求时抓包（需要包含 Cookie 和 new-api-user）。"
     );
     $done({});
   }
@@ -139,7 +139,7 @@ if (isGetHeader) {
     const key = headerKeyForHost(host);
     const raw = $prefs.valueForKey(key);
     if (!raw) {
-      $notify(notifyTitleForHost(host), "缺少参数", "请先抓包保存一次 /console/personal 的请求头。");
+      $notify(notifyTitleForHost(host), "缺少参数", "请先抓包保存一次 /api/user/self 的请求头。");
       return Promise.resolve();
     }
 
