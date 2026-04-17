@@ -1,19 +1,18 @@
 /******************************
-脚本功能：通用签到（HotaruAPI / KFC-API 等同套NewAPI源码站点）
-更新时间：2026-01-31
+脚本功能：通用签到（适配所有NewAPI源码搭建的中转站）
+更新时间：2026-04-17
 使用说明：先抓包一次保存 Cookie，再由定时任务自动签到（按域名分别保存，多站点可共用同一脚本）。
 
 [rewrite_local]
-^https:\/\/(hotaruapi\.com|kfc-api\.sxxe\.net)\/api\/user\/self$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js
+^https:\/\/.*\/api\/user\/self$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js
 
 [task_local]
-10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=通用签到(Hotaru/KFC), enabled=true
-; 如需只跑单站点（可选）
-; 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=Hotaru签到, enabled=true, argument=host=hotaruapi.com
-; 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=KFC签到, enabled=true, argument=host=kfc-api.sxxe.net
+10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=通用签到(NewAPI), enabled=true
+; 如需只跑单站点（可选），替换 example.com 为实际域名
+; 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/NewAPI.js, tag=单站点签到, enabled=true, argument=host=example.com
 
 [MITM]
-hostname = hotaruapi.com, kfc-api.sxxe.net
+hostname = %APPEND% *
 *******************************/
 
 const HEADER_KEY_PREFIX = "UniversalCheckin_Headers";
@@ -31,7 +30,24 @@ const NEED_KEYS = [
   "new-api-user",
 ];
 
-const KNOWN_HOSTS = ["hotaruapi.com", "kfc-api.sxxe.net"];
+// 动态从 $prefs 读取所有已保存的域名
+function getSavedHosts() {
+  const hosts = [];
+  try {
+    if (typeof $prefs !== "undefined" && $prefs.getAllKeys) {
+      const allKeys = $prefs.getAllKeys() || [];
+      for (const key of allKeys) {
+        if (String(key).startsWith(HEADER_KEY_PREFIX)) {
+          const host = String(key).slice((HEADER_KEY_PREFIX + ":").length);
+          if (host) hosts.push(host);
+        }
+      }
+    }
+  } catch (e) {
+    console.log("[NewAPI] Error reading saved hosts:", e);
+  }
+  return hosts;
+}
 
 function pickNeedHeaders(src = {}) {
   const dst = {};
@@ -100,7 +116,34 @@ function refererFromHost(host) {
 function notifyTitleForHost(host) {
   if (host === "hotaruapi.com") return "HotaruAPI";
   if (host === "kfc-api.sxxe.net") return "KFC-API";
-  return host;
+
+  // 从域名智能提取站点名称
+  try {
+    // 移除 www 前缀
+    let name = host.replace(/^www\./, "");
+
+    // 取第一个子域名或主域名
+    const parts = name.split(".");
+    if (parts.length > 1) {
+      name = parts[0]; // 取子域名
+    } else {
+      name = parts[0];
+    }
+
+    // 移除常见的 API 相关后缀
+    name = name
+      .replace(/[-_]api$/i, "")
+      .replace(/[-_]service$/i, "")
+      .replace(/[-_]app$/i, "")
+      .replace(/^api[-_]/i, "");
+
+    // 首字母大写
+    name = name.charAt(0).toUpperCase() + name.slice(1);
+
+    return name || host;
+  } catch (_) {
+    return host;
+  }
 }
 
 if (isGetHeader) {
@@ -109,7 +152,7 @@ if (isGetHeader) {
   const picked = pickNeedHeaders(allHeaders);
 
   if (!host || !picked || !picked.Cookie || !picked["new-api-user"]) {
-    console.log("[HotaruCheckin] header capture failed:", JSON.stringify(allHeaders));
+    console.log("[NewAPI] header capture failed:", JSON.stringify(allHeaders));
     $notify(
       "通用签到",
       "未抓到关键信息",
@@ -120,18 +163,21 @@ if (isGetHeader) {
 
   const key = headerKeyForHost(host);
   const ok = $prefs.setValueForKey(JSON.stringify(picked), key);
-  console.log(
-    `[HotaruCheckin] saved headers (${Object.keys(picked).length}) to $prefs key=${key}:`,
-    JSON.stringify(picked)
-  );
-
   const title = notifyTitleForHost(host);
+  console.log(`[NewAPI] ${title} | 参数保存 | 已保存 ${Object.keys(picked).length} 个字段`);
+
   $notify(ok ? `${title} 参数获取成功` : `${title} 参数保存失败`, "", ok ? "后续将用于自动签到。" : "写入本地存储失败，请检查 Quantumult X 配置。");
   $done({});
 } else {
   const args = parseArgs(typeof $argument !== "undefined" ? $argument : "");
   const onlyHost = (args.host || args.hostname || "").trim();
-  const hostsToRun = onlyHost ? [onlyHost] : KNOWN_HOSTS;
+  const hostsToRun = onlyHost ? [onlyHost] : getSavedHosts();
+
+  if (!onlyHost && hostsToRun.length === 0) {
+    console.log("[NewAPI] No saved hosts found. Please capture /api/user/self first.");
+    $notify("通用签到", "无可用站点", "请先抓包保存至少一个站点的 /api/user/self 请求头。");
+    $done();
+  }
 
   const doCheckin = (host) => {
     const key = headerKeyForHost(host);
@@ -176,11 +222,10 @@ if (isGetHeader) {
         const quotaAwarded =
           obj?.data?.quota_awarded !== undefined ? String(obj.data.quota_awarded) : "";
 
-        console.log(
-          `[HotaruCheckin] host=${host} status=${status} success=${String(success)} checkin_date=${checkinDate || "(empty)"} quota_awarded=${quotaAwarded || "(empty)"} message=${message || "(empty)"}`
-        );
-
         const title = notifyTitleForHost(host);
+        const statusText = success ? "✓成功" : status >= 200 && status < 300 ? "✗失败" : `✗异常(${status})`;
+        const logMsg = `[NewAPI] ${title} | ${statusText} | ${checkinDate ? `${checkinDate}` : ""}${quotaAwarded ? ` | 获得:${quotaAwarded}` : ""}${message ? ` | ${message}` : ""}`.trim();
+        console.log(logMsg);
         if (status === 401 || status === 403) {
           $notify(title, "登录失效", `HTTP ${status}，请重新抓包保存 Cookie。\n${message || body}`);
         } else if (status >= 200 && status < 300) {
@@ -196,8 +241,9 @@ if (isGetHeader) {
       },
       (reason) => {
         const err = reason?.error ? String(reason.error) : String(reason || "");
-        console.log(`[HotaruCheckin] host=${host} request error: ${err}`);
-        $notify(notifyTitleForHost(host), "网络错误", err);
+        const title = notifyTitleForHost(host);
+        console.log(`[NewAPI] ${title} | 网络错误 | ${err}`);
+        $notify(title, "网络错误", err);
       }
     );
   };
