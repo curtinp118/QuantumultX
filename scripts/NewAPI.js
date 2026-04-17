@@ -16,6 +16,7 @@ hostname = %APPEND% *
 *******************************/
 
 const HEADER_KEY_PREFIX = "UniversalCheckin_Headers";
+const HOSTS_LIST_KEY = "UniversalCheckin_HostsList"; // 用于保存已配置的站点列表
 const isGetHeader = typeof $request !== "undefined";
 
 const NEED_KEYS = [
@@ -30,23 +31,41 @@ const NEED_KEYS = [
   "new-api-user",
 ];
 
+function safeJsonParse(str) {
+  try {
+    return JSON.parse(str);
+  } catch (_) {
+    return null;
+  }
+}
+
 // 动态从 $prefs 读取所有已保存的域名
 function getSavedHosts() {
-  const hosts = [];
   try {
-    if (typeof $prefs !== "undefined" && $prefs.getAllKeys) {
-      const allKeys = $prefs.getAllKeys() || [];
-      for (const key of allKeys) {
-        if (String(key).startsWith(HEADER_KEY_PREFIX)) {
-          const host = String(key).slice((HEADER_KEY_PREFIX + ":").length);
-          if (host) hosts.push(host);
-        }
-      }
-    }
+    if (typeof $prefs === "undefined") return [];
+    const raw = $prefs.valueForKey(HOSTS_LIST_KEY);
+    if (!raw) return [];
+    const hosts = safeJsonParse(raw) || [];
+    return Array.isArray(hosts) ? hosts.filter(h => h && typeof h === "string") : [];
   } catch (e) {
     console.log("[NewAPI] Error reading saved hosts:", e);
+    return [];
   }
-  return hosts;
+}
+
+// 保存已配置的站点到列表
+function addHostToList(host) {
+  try {
+    if (typeof $prefs === "undefined") return;
+    const hosts = getSavedHosts();
+    if (!hosts.includes(host)) {
+      hosts.push(host);
+      $prefs.setValueForKey(JSON.stringify(hosts), HOSTS_LIST_KEY);
+      console.log("[NewAPI] Updated hosts list:", hosts.join(", "));
+    }
+  } catch (e) {
+    console.log("[NewAPI] Error adding host to list:", e);
+  }
 }
 
 function pickNeedHeaders(src = {}) {
@@ -59,14 +78,6 @@ function pickNeedHeaders(src = {}) {
     if (v !== undefined) dst[k] = v;
   }
   return dst;
-}
-
-function safeJsonParse(str) {
-  try {
-    return JSON.parse(str);
-  } catch (_) {
-    return null;
-  }
 }
 
 function headerKeyForHost(host) {
@@ -163,6 +174,9 @@ if (isGetHeader) {
 
   const key = headerKeyForHost(host);
   const ok = $prefs.setValueForKey(JSON.stringify(picked), key);
+  if (ok) {
+    addHostToList(host); // 保存参数成功后，更新站点列表
+  }
   const title = notifyTitleForHost(host);
   console.log(`[NewAPI] ${title} | 参数保存 | 已保存 ${Object.keys(picked).length} 个字段`);
 
