@@ -1,6 +1,6 @@
 /******************************
 脚本功能：通用签到（适配所有NewAPI源码搭建的中转站）
-更新时间：2026-04-17
+更新时间：2026-04-20
 使用说明：先抓包一次保存 Cookie，再由定时任务自动签到（按域名分别保存，多站点可共用同一脚本）。
 
 [rewrite_local]
@@ -159,13 +159,14 @@ function notifyTitleForHost(host, account) {
   try {
     let name = host.replace(/^www\./, "");
     const parts = name.split(".");
-    name = parts[0];
+    name = parts[0].trim();
+    if (!name) name = parts[1] || host;
     name = name
       .replace(/[-_]api$/i, "")
       .replace(/[-_]service$/i, "")
       .replace(/[-_]app$/i, "")
       .replace(/^api[-_]/i, "");
-    siteName = name.toUpperCase();
+    siteName = name.toUpperCase() || host.toUpperCase();
   } catch (_) {}
 
   return account && account.trim() ? `${siteName}(${account})` : siteName;
@@ -186,7 +187,7 @@ if (isGetHeader) {
     $done({});
   }
 
-  const account = picked["new-api-user"] || "";
+  const account = (picked["new-api-user"] || "").trim();
   const key = headerKeyForHost(host, account);
   const ok = $prefs.setValueForKey(JSON.stringify(picked), key);
   if (ok) {
@@ -262,7 +263,10 @@ if (isGetHeader) {
           $notify(title, "登录失效", `HTTP ${status}，请重新抓包保存 Cookie。\n${message || body}`);
         } else if (status >= 200 && status < 300) {
           if (success) {
-            const content = `${checkinDate ? `日期：${checkinDate}\n` : ""}${quotaAwarded ? `获得：${quotaAwarded}` : "签到成功"}`;
+            let content = checkinDate ? `日期：${checkinDate}` : "签到成功";
+            if (quotaAwarded) {
+              content += `\n获得：${quotaAwarded}`;
+            }
             $notify(title, "签到成功", content);
           } else {
             $notify(title, "签到失败", message || body || `HTTP ${status}`);
