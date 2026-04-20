@@ -16,7 +16,7 @@ hostname = %APPEND% *
 *******************************/
 
 const HEADER_KEY_PREFIX = "UniversalCheckin_Headers";
-const HOSTS_LIST_KEY = "UniversalCheckin_HostsList"; // 用于保存已配置的站点列表
+const HOSTS_LIST_KEY = "UniversalCheckin_HostsList";
 const isGetHeader = typeof $request !== "undefined";
 
 const NEED_KEYS = [
@@ -39,7 +39,6 @@ function safeJsonParse(str) {
   }
 }
 
-// 动态从 $prefs 读取所有已保存的域名
 function getSavedHosts() {
   try {
     if (typeof $prefs === "undefined") return [];
@@ -53,7 +52,6 @@ function getSavedHosts() {
   }
 }
 
-// 保存已配置的站点到列表
 function addHostToList(host) {
   try {
     if (typeof $prefs === "undefined") return;
@@ -68,7 +66,6 @@ function addHostToList(host) {
   }
 }
 
-// 保存账户到指定站点
 function addAccountToHost(host, account) {
   try {
     if (typeof $prefs === "undefined" || !account || !account.trim()) return;
@@ -85,14 +82,12 @@ function addAccountToHost(host, account) {
   }
 }
 
-// 获取指定站点的所有已保存账户
 function getAccountsForHost(host) {
   try {
     if (typeof $prefs === "undefined") return [""];
     const accountsKey = `${HEADER_KEY_PREFIX}:Accounts:${host}`;
     const raw = $prefs.valueForKey(accountsKey);
     const accounts = safeJsonParse(raw) || [];
-    // 如果没有账户列表，返回[""]表示使用默认键（向后兼容）
     return accounts.length > 0 ? accounts : [""];
   } catch (e) {
     console.log("[NewAPI] Error reading accounts:", e);
@@ -160,43 +155,20 @@ function refererFromHost(host) {
 }
 
 function notifyTitleForHost(host, account) {
-  let baseName = host;
-  if (host === "hotaruapi.com") baseName = "HotaruAPI";
-  else if (host === "kfc-api.sxxe.net") baseName = "KFC-API";
-  else {
-    // 从域名智能提取站点名称
-    try {
-      // 移除 www 前缀
-      let name = host.replace(/^www\./, "");
+  let siteName = host;
+  try {
+    let name = host.replace(/^www\./, "");
+    const parts = name.split(".");
+    name = parts[0];
+    name = name
+      .replace(/[-_]api$/i, "")
+      .replace(/[-_]service$/i, "")
+      .replace(/[-_]app$/i, "")
+      .replace(/^api[-_]/i, "");
+    siteName = name.charAt(0).toUpperCase() + name.slice(1);
+  } catch (_) {}
 
-      // 取第一个子域名或主域名
-      const parts = name.split(".");
-      if (parts.length > 1) {
-        name = parts[0]; // 取子域名
-      } else {
-        name = parts[0];
-      }
-
-      // 移除常见的 API 相关后缀
-      name = name
-        .replace(/[-_]api$/i, "")
-        .replace(/[-_]service$/i, "")
-        .replace(/[-_]app$/i, "")
-        .replace(/^api[-_]/i, "");
-
-      // 首字母大写
-      name = name.charAt(0).toUpperCase() + name.slice(1);
-      baseName = name || host;
-    } catch (_) {
-      baseName = host;
-    }
-  }
-
-  // 如果提供了账户标识，追加到标题中
-  if (account && account.trim()) {
-    return `${baseName}(${account})`;
-  }
-  return baseName;
+  return account && account.trim() ? `${siteName}(${account})` : siteName;
 }
 
 if (isGetHeader) {
