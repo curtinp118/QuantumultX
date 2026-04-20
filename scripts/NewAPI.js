@@ -68,6 +68,38 @@ function addHostToList(host) {
   }
 }
 
+// 保存账户到指定站点
+function addAccountToHost(host, account) {
+  try {
+    if (typeof $prefs === "undefined" || !account || !account.trim()) return;
+    const accountsKey = `${HEADER_KEY_PREFIX}:Accounts:${host}`;
+    const raw = $prefs.valueForKey(accountsKey);
+    const accounts = safeJsonParse(raw) || [];
+    if (!accounts.includes(account)) {
+      accounts.push(account);
+      $prefs.setValueForKey(JSON.stringify(accounts), accountsKey);
+      console.log(`[NewAPI] Account added to ${host}:`, account);
+    }
+  } catch (e) {
+    console.log("[NewAPI] Error adding account to host:", e);
+  }
+}
+
+// 获取指定站点的所有已保存账户
+function getAccountsForHost(host) {
+  try {
+    if (typeof $prefs === "undefined") return [""];
+    const accountsKey = `${HEADER_KEY_PREFIX}:Accounts:${host}`;
+    const raw = $prefs.valueForKey(accountsKey);
+    const accounts = safeJsonParse(raw) || [];
+    // 如果没有账户列表，返回[""]表示使用默认键（向后兼容）
+    return accounts.length > 0 ? accounts : [""];
+  } catch (e) {
+    console.log("[NewAPI] Error reading accounts:", e);
+    return [""];
+  }
+}
+
 function pickNeedHeaders(src = {}) {
   const dst = {};
   const lowerMap = {};
@@ -80,7 +112,10 @@ function pickNeedHeaders(src = {}) {
   return dst;
 }
 
-function headerKeyForHost(host) {
+function headerKeyForHost(host, account) {
+  if (account && account.trim()) {
+    return `${HEADER_KEY_PREFIX}:${host}:${account}`;
+  }
   return `${HEADER_KEY_PREFIX}:${host}`;
 }
 
@@ -124,37 +159,44 @@ function refererFromHost(host) {
   return `https://${host}/console/personal`;
 }
 
-function notifyTitleForHost(host) {
-  if (host === "hotaruapi.com") return "HotaruAPI";
-  if (host === "kfc-api.sxxe.net") return "KFC-API";
+function notifyTitleForHost(host, account) {
+  let baseName = host;
+  if (host === "hotaruapi.com") baseName = "HotaruAPI";
+  else if (host === "kfc-api.sxxe.net") baseName = "KFC-API";
+  else {
+    // 从域名智能提取站点名称
+    try {
+      // 移除 www 前缀
+      let name = host.replace(/^www\./, "");
 
-  // 从域名智能提取站点名称
-  try {
-    // 移除 www 前缀
-    let name = host.replace(/^www\./, "");
+      // 取第一个子域名或主域名
+      const parts = name.split(".");
+      if (parts.length > 1) {
+        name = parts[0]; // 取子域名
+      } else {
+        name = parts[0];
+      }
 
-    // 取第一个子域名或主域名
-    const parts = name.split(".");
-    if (parts.length > 1) {
-      name = parts[0]; // 取子域名
-    } else {
-      name = parts[0];
+      // 移除常见的 API 相关后缀
+      name = name
+        .replace(/[-_]api$/i, "")
+        .replace(/[-_]service$/i, "")
+        .replace(/[-_]app$/i, "")
+        .replace(/^api[-_]/i, "");
+
+      // 首字母大写
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+      baseName = name || host;
+    } catch (_) {
+      baseName = host;
     }
-
-    // 移除常见的 API 相关后缀
-    name = name
-      .replace(/[-_]api$/i, "")
-      .replace(/[-_]service$/i, "")
-      .replace(/[-_]app$/i, "")
-      .replace(/^api[-_]/i, "");
-
-    // 首字母大写
-    name = name.charAt(0).toUpperCase() + name.slice(1);
-
-    return name || host;
-  } catch (_) {
-    return host;
   }
+
+  // 如果提供了账户标识，追加到标题中
+  if (account && account.trim()) {
+    return `${baseName}(${account})`;
+  }
+  return baseName;
 }
 
 if (isGetHeader) {
@@ -172,12 +214,16 @@ if (isGetHeader) {
     $done({});
   }
 
-  const key = headerKeyForHost(host);
+  const account = picked["new-api-user"] || "";
+  const key = headerKeyForHost(host, account);
   const ok = $prefs.setValueForKey(JSON.stringify(picked), key);
   if (ok) {
     addHostToList(host); // 保存参数成功后，更新站点列表
+    if (account) {
+      addAccountToHost(host, account); // 保存账户到站点
+    }
   }
-  const title = notifyTitleForHost(host);
+  const title = notifyTitleForHost(host, account);
   console.log(`[NewAPI] ${title} | 参数保存 | 已保存 ${Object.keys(picked).length} 个字段`);
 
   $notify(ok ? `${title} 参数获取成功` : `${title} 参数保存失败`, "", ok ? "后续将用于自动签到。" : "写入本地存储失败，请检查 Quantumult X 配置。");
@@ -193,17 +239,17 @@ if (isGetHeader) {
     $done();
   }
 
-  const doCheckin = (host) => {
-    const key = headerKeyForHost(host);
+  const doCheckin = (host, account = "") => {
+    const key = headerKeyForHost(host, account);
     const raw = $prefs.valueForKey(key);
     if (!raw) {
-      $notify(notifyTitleForHost(host), "缺少参数", "请先抓包保存一次 /api/user/self 的请求头。");
+      $notify(notifyTitleForHost(host, account), "缺少参数", "请先抓包保存一次 /api/user/self 的请求头。");
       return Promise.resolve();
     }
 
     const savedHeaders = safeJsonParse(raw);
     if (!savedHeaders) {
-      $notify(notifyTitleForHost(host), "参数异常", "已保存的请求头解析失败，请重新抓包保存。");
+      $notify(notifyTitleForHost(host, account), "参数异常", "已保存的请求头解析失败，请重新抓包保存。");
       return Promise.resolve();
     }
 
@@ -236,7 +282,7 @@ if (isGetHeader) {
         const quotaAwarded =
           obj?.data?.quota_awarded !== undefined ? String(obj.data.quota_awarded) : "";
 
-        const title = notifyTitleForHost(host);
+        const title = notifyTitleForHost(host, account);
         const statusText = success ? "✓成功" : status >= 200 && status < 300 ? "✗失败" : `✗异常(${status})`;
         const logMsg = `[NewAPI] ${title} | ${statusText} | ${checkinDate ? `${checkinDate}` : ""}${quotaAwarded ? ` | 获得:${quotaAwarded}` : ""}${message ? ` | ${message}` : ""}`.trim();
         console.log(logMsg);
@@ -255,7 +301,7 @@ if (isGetHeader) {
       },
       (reason) => {
         const err = reason?.error ? String(reason.error) : String(reason || "");
-        const title = notifyTitleForHost(host);
+        const title = notifyTitleForHost(host, account);
         console.log(`[NewAPI] ${title} | 网络错误 | ${err}`);
         $notify(title, "网络错误", err);
       }
@@ -264,8 +310,11 @@ if (isGetHeader) {
 
   (async () => {
     for (const h of hostsToRun) {
-      // eslint-disable-next-line no-await-in-loop
-      await doCheckin(h);
+      const accounts = getAccountsForHost(h);
+      for (const acc of accounts) {
+        // eslint-disable-next-line no-await-in-loop
+        await doCheckin(h, acc);
+      }
     }
     $done();
   })();
