@@ -165,7 +165,7 @@ function notifyTitleForHost(host, account) {
       .replace(/[-_]service$/i, "")
       .replace(/[-_]app$/i, "")
       .replace(/^api[-_]/i, "");
-    siteName = name.charAt(0).toUpperCase() + name.slice(1);
+    siteName = name.toUpperCase();
   } catch (_) {}
 
   return account && account.trim() ? `${siteName}(${account})` : siteName;
