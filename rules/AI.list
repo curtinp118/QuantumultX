@@ -1,0 +1,158 @@
+# ===== AI Rules =====
+
+# ===== Apple Intelligence =====
+HOST-KEYWORD,apple-wit,no-policy
+HOST-SUFFIX,app-measurement.com,no-policy
+HOST-SUFFIX,apple-cloudkit.com,no-policy
+HOST-SUFFIX,apple-livephotos.com,no-policy
+HOST-SUFFIX,apple.com,no-policy
+HOST-SUFFIX,apple.com.cn,no-policy
+HOST-SUFFIX,icloud-content.com,no-policy
+HOST-SUFFIX,icloud.com,no-policy
+HOST-SUFFIX,icloud.com.cn,no-policy
+HOST-SUFFIX,itunes.apple.com,no-policy
+HOST-SUFFIX,me.com,no-policy
+HOST-SUFFIX,mzstatic.com,no-policy
+HOST,p67-keyvalueservice.icloud.com,no-policy
+HOST,p106-keyvalueservice.icloud.com,no-policy
+HOST,api.apple-cloudkit.com,no-policy
+HOST,api.smoot.apple.com,no-policy
+HOST,binary-blob-repository.apple.com,no-policy
+HOST,guzzoni.apple.com,no-policy
+
+# ===== 通用 =====
+HOST,api.statsig.com,no-policy
+HOST,browser-intake-datadoghq.com,no-policy
+HOST,static.cloudflareinsights.com,no-policy
+HOST-SUFFIX,algolia.net,no-policy
+HOST-SUFFIX,auth0.com,no-policy
+HOST-SUFFIX,cloudflare.com,no-policy
+HOST-SUFFIX,arkoselabs.com,no-policy
+HOST-SUFFIX,statsigapi.net,no-policy
+HOST-SUFFIX,featuregates.org,no-policy
+HOST-SUFFIX,identrust.com,no-policy
+HOST-SUFFIX,intercom.io,no-policy
+HOST-SUFFIX,intercomcdn.com,no-policy
+HOST-SUFFIX,launchdarkly.com,no-policy
+HOST-SUFFIX,segment.io,no-policy
+HOST-SUFFIX,amazonaws.com,no-policy
+HOST-SUFFIX,wp.com,no-policy
+HOST-SUFFIX,sentry.io,no-policy
+HOST-SUFFIX,stripe.com,no-policy
+
+# ===== OpenAI / ChatGPT =====
+HOST,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,no-policy
+HOST,openaicomproductionae4b.blob.core.windows.net,no-policy
+HOST,production-openaicom-storage.azureedge.net,no-policy
+HOST-SUFFIX,openai.com,no-policy
+HOST-SUFFIX,chatgpt.com,no-policy
+HOST-SUFFIX,oaistatic.com,no-policy
+HOST-SUFFIX,oaiusercontent.com,no-policy
+HOST-SUFFIX,livekit.cloud,no-policy
+HOST-SUFFIX,ai.com,no-policy
+HOST-SUFFIX,azureedge.net,no-policy
+HOST-SUFFIX,imgix.net,no-policy
+
+# ===== Anthropic / Claude =====
+HOST,cdn.usefathom.com,no-policy
+HOST-SUFFIX,anthropic.com,no-policy
+HOST-SUFFIX,claude.ai,no-policy
+HOST-SUFFIX,claudeusercontent.com,no-policy
+
+# ===== Google AI（Gemini / Bard / NotebookLM）=====
+HOST,ai.google.dev,no-policy
+HOST,makersuite.google.com,no-policy
+HOST-SUFFIX,gemini.google.com,no-policy
+HOST-SUFFIX,notebooklm.google.com,no-policy
+HOST-SUFFIX,notebooklm.google,no-policy
+HOST-SUFFIX,apis.google.com,no-policy
+HOST-SUFFIX,clients4.google.com,no-policy
+HOST-SUFFIX,clients6.google.com,no-policy
+HOST-SUFFIX,googleapis.com,no-policy
+HOST-SUFFIX,googleusercontent.com,no-policy
+HOST-SUFFIX,deepmind.com,no-policy
+HOST-SUFFIX,deepmind.google,no-policy
+HOST-SUFFIX,generativeai.google,no-policy
+HOST-SUFFIX,colab.google.com,no-policy
+HOST-SUFFIX,colab.research.google.com,no-policy
+HOST-SUFFIX,developerprofiles.google.com,no-policy
+HOST-SUFFIX,proactivebackend-pa.googleapis.com,no-policy
+
+# ===== Microsoft Copilot =====
+HOST,api.msn.com,no-policy
+HOST,assets.msn.com,no-policy
+HOST,copilot.microsoft.com,no-policy
+HOST,gateway.bingviz.microsoft.net,no-policy
+HOST,gateway.bingviz.microsoftapp.net,no-policy
+HOST,in.appcenter.ms,no-policy
+HOST,location.microsoft.com,no-policy
+HOST,odc.officeapps.live.com,no-policy
+HOST,r.bing.com,no-policy
+HOST,self.events.data.microsoft.com,no-policy
+HOST,services.bingapis.com,no-policy
+HOST,sydney.bing.com,no-policy
+HOST,www.bing.com,no-policy
+HOST-SUFFIX,edgeservices.bing.com,no-policy
+HOST-SUFFIX,api.microsoftapp.net,no-policy
+HOST-SUFFIX,bing-shopping.microsoft-falcon.io,no-policy
+
+# ===== Perplexity =====
+HOST,pplx-res.cloudinary.com,no-policy
+HOST-SUFFIX,perplexity.ai,no-policy
+HOST-SUFFIX,perplexity.com,no-policy
+HOST-SUFFIX,pplx.ai,no-policy
+
+# ===== Poe =====
+HOST-SUFFIX,poe.com,no-policy
+HOST-SUFFIX,poecdn.net,no-policy
+
+# ===== xAI / Grok =====
+HOST-SUFFIX,x.ai,no-policy
+HOST-SUFFIX,grok.com,no-policy
+
+# ===== Midjourney =====
+HOST-SUFFIX,midjourney.com,no-policy
+
+# ===== GitHub Copilot =====
+HOST-SUFFIX,copilot.githubusercontent.com,no-policy
+HOST-SUFFIX,github.com,no-policy
+
+# ===== 代码/开发工具 =====
+HOST-SUFFIX,replit.com,no-policy
+HOST-SUFFIX,tabnine.com,no-policy
+
+# ===== 图像/视频生成 =====
+HOST-SUFFIX,stability.ai,no-policy
+HOST-SUFFIX,runwayml.com,no-policy
+HOST-SUFFIX,synthesia.io,no-policy
+HOST-SUFFIX,heygen.com,no-policy
+HOST-SUFFIX,d-id.com,no-policy
+
+# ===== 语音 AI =====
+HOST-SUFFIX,elevenlabs.io,no-policy
+HOST-SUFFIX,murf.ai,no-policy
+
+# ===== LLM 平台/API =====
+HOST-SUFFIX,huggingface.co,no-policy
+HOST-SUFFIX,replicate.com,no-policy
+HOST-SUFFIX,cohere.com,no-policy
+HOST-SUFFIX,mistral.ai,no-policy
+HOST-SUFFIX,groq.com,no-policy
+HOST-SUFFIX,together.ai,no-policy
+HOST-SUFFIX,modal.com,no-policy
+
+# ===== 内容生成 =====
+HOST-SUFFIX,jasper.ai,no-policy
+HOST-SUFFIX,copy.ai,no-policy
+HOST-SUFFIX,writesonic.com,no-policy
+
+# ===== 设计工具 AI =====
+HOST-SUFFIX,canva.com,no-policy
+HOST-SUFFIX,figma.com,no-policy
+
+# ===== 其他 AI 工具 =====
+HOST-SUFFIX,cursor.sh,no-policy
+HOST-SUFFIX,dify.ai,no-policy
+HOST-SUFFIX,grazie.ai,no-policy
+HOST-SUFFIX,meta.ai,no-policy
+HOST-SUFFIX,meta.com,no-policy
