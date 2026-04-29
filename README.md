@@ -1,86 +1,99 @@
 
-# Quantumult X 个人配置库
+# Quantumult X 配置库
 
-本仓库为 Quantumult X 提供优化配置、分流规则及实用脚本，支持开箱即用与灵活自定义，助力提升网络体验。
+一个精心维护的 Quantumult X 配置文件和自动化脚本集合。
 
+## 📁 仓库结构
 
-## 📋 项目结构
+```
+QuantumultX/
+├── README.md                          # 本文件（项目概览）
+├── QX_CONFIG_GUIDE.md                 # 详细配置指南
+├── LICENSE                            # 许可证
+├── profile/
+│   └── QX_Config.conf                 # 主配置文件（推荐使用）
+├── scripts/                           # 自动化脚本
+│   ├── NewAPI.js                      # NewAPI 中转站通用签到
+│   ├── V2EX.js                        # V2EX 每日签到
+│   ├── CDRail.js                      # 成都地铁签到
+│   ├── cytq.js
+│   ├── Nicegram.js
+│   ├── dreamface.js
+│   ├── NSCheckin.js
+│   ├── notability.js
+│   └── buding.js
+├── rules/                             # 本地规则文件
+│   ├── AI.list                        # AI 服务规则
+│   └── AppleIntelligence.list         # 苹果智能服务规则
+└── icons/                             # 策略图标
+    └── Curtin.jpg                     # 仓库头像
+```
 
-- **profile/**：核心配置文件
-  - `QX_Config.conf`：完整配置模板，涵盖通用设置、DNS、策略组等
-- **scripts/**：实用脚本集合
-  - 包含广告拦截、功能增强等辅助脚本
-- **rewrite/**：重写规则目录
-  - 各类应用的重写规则文件
-- **rules/**：分流规则目录
-  - 各类分流规则文件
+## ✨ 主要特性
 
+### 🔧 完整配置
+- **智能分流**：国内直连、国外代理、流媒体、社交等智能分类
+- **地区策略**：香港、台湾、日本、新加坡、美国、韩国等节点智能分配
+- **策略优选**：支持手动选择、自动延迟测试、目标地址哈希
+- **DNS 优化**：预配置多个高效 DNS 解析服务
 
-## 👀 配置预览
-
-以下为 Quantumult X 配置界面预览：
-
-<div style="display: flex; gap: 12px;">
-  <img src="icons/homepage.jpeg" alt="配置预览1" width="250" />
-  <img src="icons/homepage2.jpeg" alt="配置预览2" width="250" />
-  <img src="icons/homepage3.jpeg" alt="配置预览3" width="250" />
-</div>
-
----
-
+### 📋 规则集成
+- **国内规则**：国内 CDN、金融、社交直连
+- **国际规则**：Google、Apple、Microsoft、GitHub、PayPal
+- **流媒体**：Netflix、YouTube、Spotify、BiliBili
+- **广告拦截**：多个高质量广告过滤规则
+- **更新频率**：自动按规则更新周期同步
 
 ## 🚀 快速开始
 
-### 1. 导入配置文件
+### 1. 导入配置
 
-**方式一：URL 导入（推荐）**
-1. 打开 Quantumult X，点击右下角图标
-2. 选择「下载配置」
-3. 粘贴配置文件 Raw 链接或本地路径：[长按复制连接](https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/profile/QX_Config.conf)
-4. 点击「下载」并保存
+在 Quantumult X 中：
+1. 点击「配置」
+2. 选择「下载」或「从文件导入」
+3. 复制以下地址：
+   ```
+   https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/profile/QX_Config.conf
+   ```
 
-**方式二：手动导入**
-1. 复制 [profile/QX_Config.conf](profile/QX_Config.conf) 的完整内容
-2. 在 Quantumult X 中点击右下角图标
-3. 选择「编辑」
-4. 粘贴内容并保存
+### 2. 配置订阅
 
+编辑 `[server_remote]` 部分添加你的机场订阅链接。
 
+### 3. MITM 证书
 
+参考 [QX_CONFIG_GUIDE.md](QX_CONFIG_GUIDE.md) 中的 MITM 配置部分。
 
-## ⚠️ 重要声明
+### 4. 启用脚本
 
-- 部分脚本用于修改应用响应数据，仅供个人学习和测试
-- 使用这些脚本可能违反相关应用服务条款，风险自担
-- 不建议在生产环境或关键账户使用
-- 作者不对使用本仓库资源产生的任何后果负责
+编辑 `[task_local]` 部分启用需要的自动签到脚本。
 
 
+## 🔐 隐私与安全
 
-## 🤝 使用建议
-
-- 定期检查配置文件和脚本更新
-- 根据实际网络环境调整 DNS 服务器和节点选择
-- 谨慎启用修改响应脚本，注意账户安全
-- 更新前请备份现有配置
-
+本仓库中的 `QX_Config.conf` 为公开配置：
+- ✅ 所有规则和脚本链接都是公开的
+- ✅ MITM 证书信息已使用占位符替换
+- ✅ 个人订阅 Token 需自行添加
 
 
-## 🙏 鸣谢与引用
+## 🤝 贡献
 
-本项目部分规则及脚本引用自以下优秀作者及社区：
+- [Quantumult X 官方网站](https://quantumultx.com)
+- [iOS 规则脚本库 - blackmatrix7](https://github.com/blackmatrix7/ios_rule_script)
+- [资源解析与脚本 - KOP-XIAO](https://github.com/KOP-XIAO/QuantumultX)
 
-- **分流规则作者**：blackmatrix7
-- **资源解析与脚本**：KOP-XIAO
-- **广告拦截规则**：墨鱼去广告（chxm1023）、ddgksf2013
-- **图标与其他资源**：Koolson、fmz200、xream 
 
-感谢以上作者及社区的无私分享与贡献！
+欢迎提交 Issue 和 Pull Request！
 
 ## 📄 许可证
 
-本项目采用 [GNU General Public License v3.0](LICENSE) 许可证，详见 [LICENSE](LICENSE) 文件。
+本项目采用 MIT License 开源许可证。详见 [LICENSE](LICENSE) 文件。
+
+## ⚠️ 免责声明
+
+本仓库提供的配置和脚本仅供学习参考使用，用户需自行承担使用本配置的一切后果。
 
 ---
 
-> **最后更新：2026年1月12日**
+**最后更新**: 2026-04-29
