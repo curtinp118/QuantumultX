@@ -300,27 +300,25 @@ if (isGetHeader) {
         const title = notifyTitleForHost(host, account);
         
         if (status === 401 || status === 403) {
-          // 登录失效，标记该账户为失败
+          // 只有登录失效才标记为失败
           markAccountFailed(host, account);
           $notify(title, "登录失效 ✗", `已停止执行，请重新抓包保存 Cookie`);
         } else if (status >= 200 && status < 300) {
+          // 清除失败标记（因为能收到200响应说明Cookie还有效）
+          clearAccountFailed(host, account);
           if (success) {
-            // 成功时清除失败标记（如果存在）
-            clearAccountFailed(host, account);
             let content = checkinDate ? `日期：${checkinDate}` : "签到成功";
             if (quotaAwarded) {
               content += `\n获得：${quotaAwarded}`;
             }
             $notify(title, "✓ 签到成功", content);
           } else {
-            // 业务逻辑失败，标记为失败
-            markAccountFailed(host, account);
-            $notify(title, "✗ 签到失败", message || body || `HTTP ${status}`);
+            // 今日已签到等业务逻辑失败，不标记为失败，正常通知
+            $notify(title, "签到信息", message || body);
           }
         } else {
-          // 其他异常，标记为失败
-          markAccountFailed(host, account);
-          $notify(title, `✗ 接口异常 ${status}`, message || body);
+          // 其他异常不标记为失败，正常通知
+          $notify(title, `接口异常 ${status}`, message || body);
         }
       },
       (reason) => {
