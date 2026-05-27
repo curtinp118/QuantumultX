@@ -19,6 +19,7 @@ QuantumultX/
 ├── scripts/                           # 自动化脚本
 │   ├── new-api.js                     # NewAPI 中转站通用签到
 │   ├── v2ex.js                        # V2EX 每日签到
+│   ├── glados.js                      # GLaDOS / Railgun 签到 + 积分兑换
 │   ├── cd-rail.js                     # 成都地铁签到
 │   ├── cmcc.js                        # 中国移动签到
 │   ├── nodeseek.js                    # NodeSeek 论坛签到
@@ -56,7 +57,7 @@ QuantumultX/
 - **广告拦截**：多个高质量广告过滤规则
 
 ### 📜 自动化脚本
-- **签到类**：NewAPI 通用签到、V2EX、成都地铁、中国移动、NodeSeek
+- **签到类**：NewAPI 通用签到、V2EX、GLaDOS/Railgun、成都地铁、中国移动、NodeSeek
 - **解锁类**：布丁锁屏、彩云天气、Nicegram、DreamFace、Notability
 
 ### 🔄 重写规则
@@ -100,6 +101,7 @@ QuantumultX/
 |------|------|----------|
 | `new-api.js` | NewAPI 中转站通用签到 | 先抓包保存 `/api/user/self` 的 Cookie，支持多站点多账户 |
 | `v2ex.js` | V2EX 每日签到 | 访问 V2EX 个人主页保存 Cookie |
+| `glados.js` | GLaDOS / Railgun 签到 + 积分兑换 | 访问 glados.network/railgun.info/glaDos.vip 任意域名控制台抓包保存 Cookie，支持多域名多账户 |
 | `cd-rail.js` | 成都地铁签到 | 打开成都地铁 App 签到页面保存请求头 |
 | `cmcc.js` | 中国移动签到 | 打开移动 App 签到页面保存 Cookie |
 | `nodeseek.js` | NodeSeek 论坛签到 | 访问 NodeSeek 个人页面保存请求头 |
@@ -158,4 +160,4 @@ QuantumultX/
 
 ---
 
-**最后更新**: 2026-05-27
+**最后更新**: 2026-05-28
