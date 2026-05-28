@@ -2,10 +2,11 @@
 /******************************
 脚本功能：成都地铁签到(积分)
 更新时间：2026-01-25
+作者：Curtinp118
 说明：打开成都地铁-我的-会员中心 点击签到按钮 手动签到一次 脚本将自动保存用户信息
 *******************************
 [rewrite_local]
-^https:\/\/app\.cdmetro\.chengdurail\.cn\/platform\/users\/user\/sign-in-integral(-day)?(\\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/cd-rail.js
+^https:\/\/app\.cdmetro\.chengdurail\.cn\/platform\/users\/user\/sign-in-integral(-day)?(\?.*)?$ url script-request-header https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/cd-rail.js
 
 [task_local]
 10 9 * * * https://raw.githubusercontent.com/curtinp118/QuantumultX/refs/heads/main/scripts/cd-rail.js, tag=成都地铁签到, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/doraemon/Doraemon-1022.png, enabled=true
@@ -96,34 +97,32 @@ if (isGetHeader) {
     return $done();
   }
 
-  const url = `https://app.cdmetro.chengdurail.cn/platform/users/user/sign-in-integral`;
-  const method = `GET`;
+  const url = "https://app.cdmetro.chengdurail.cn/platform/users/user/sign-in-integral";
+  const method = "GET";
 
   const headers = {
-    Connection: savedHeaders["Connection"] || `keep-alive`,
-    "Accept-Encoding": savedHeaders["Accept-Encoding"] || `gzip, deflate, br`,
-    Accept: savedHeaders["Accept"] || `*/*`,
-    "Accept-Language": savedHeaders["Accept-Language"] || `zh-CN,zh-Hans;q=0.9`,
-    Host: savedHeaders["Host"] || `app.cdmetro.chengdurail.cn`,
-    "User-Agent": savedHeaders["User-Agent"] || `CDMetro`,
-    "system-version": savedHeaders["system-version"] || ``,
-    system: savedHeaders["system"] || ``,
-    "app-version": savedHeaders["app-version"] || ``,
-    appVersion: savedHeaders["appVersion"] || ``,
-    "device-id": savedHeaders["device-id"] || savedHeaders["deviceId"] || ``,
-    deviceId: savedHeaders["deviceId"] || savedHeaders["device-id"] || ``,
-    source: savedHeaders["source"] || ``,
-    vendor: savedHeaders["vendor"] || ``,
-    language: savedHeaders["language"] || ``,
-    user: savedHeaders["user"] || ``,
-    token: savedHeaders["token"] || ``,
-    "app-token": savedHeaders["app-token"] || ``,
-    Cookie: savedHeaders["Cookie"] || ``,
+    Connection: savedHeaders["Connection"] || "keep-alive",
+    "Accept-Encoding": savedHeaders["Accept-Encoding"] || "gzip, deflate, br",
+    Accept: savedHeaders["Accept"] || "*/*",
+    "Accept-Language": savedHeaders["Accept-Language"] || "zh-CN,zh-Hans;q=0.9",
+    Host: savedHeaders["Host"] || "app.cdmetro.chengdurail.cn",
+    "User-Agent": savedHeaders["User-Agent"] || "CDMetro",
+    "system-version": savedHeaders["system-version"] || "",
+    system: savedHeaders["system"] || "",
+    "app-version": savedHeaders["app-version"] || "",
+    appVersion: savedHeaders["appVersion"] || "",
+    "device-id": savedHeaders["device-id"] || savedHeaders["deviceId"] || "",
+    deviceId: savedHeaders["deviceId"] || savedHeaders["device-id"] || "",
+    source: savedHeaders["source"] || "",
+    vendor: savedHeaders["vendor"] || "",
+    language: savedHeaders["language"] || "",
+    user: savedHeaders["user"] || "",
+    token: savedHeaders["token"] || "",
+    "app-token": savedHeaders["app-token"] || "",
+    Cookie: savedHeaders["Cookie"] || "",
   };
 
-  const myRequest = { url, method, headers };
-
-  $task.fetch(myRequest).then(
+  $task.fetch({ url, method, headers }).then(
     (resp) => {
       const status = resp.statusCode;
       const body = resp.body || "";
