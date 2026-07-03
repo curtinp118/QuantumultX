@@ -134,6 +134,28 @@ QuantumultX/
 - ✅ 个人订阅 Token 需自行添加
 - ✅ Cookie 等敏感信息仅保存在本地
 
+## 🚀 机场推荐
+
+### 吹雪云｜低价大流量
+
+注册即送 **7 天 128G 试用流量**，先试用，满意再购买。
+
+开业限时活动：优惠券 `50OFF`，**全场 5 折**，截止 **7 月 9 日**。
+[![pmwg9FP.jpg](https://s41.ax1x.com/2026/07/03/pmwg9FP.jpg)](https://imgchr.com/i/pmwg9FP)
+🔗 立即注册[吹雪云](https://xn--9kqs1lo79d.com/#/register?code=hxevCvYa)低至 **¥4 / 月**，大流量用户可优先考虑。
+
+---
+
+### 其他可选
+
+**龙珠 Z 加速**｜高速直连，50G ¥2 / 月起
+🔗 [点击注册](https://love.dragonz.cc/#/register?code=UOm5zMbv)
+
+**奈雪**｜可注册查看当前套餐与节点
+🔗 [点击注册](https://www.naixueyun.net/#/register?code=SDzhfUgs)
+
+> 建议先注册试用，按自己的地区、设备和流量需求选择。
+
 ## 🤝 相关资源
 
 - [Scripthub 脚本库](https://github.com/curtinp118/Scripthub) — 统一脚本管理
