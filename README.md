@@ -14,6 +14,8 @@ Quantumult X 配置文件集合，脚本已迁移至 [Scripthub](https://github.
 QuantumultX/
 ├── README.md                          # 本文件
 ├── LICENSE                            # MIT 许可证
+├── assets/                            # README 图片资源
+│   └── chuixue-price-list.jpg         # 吹雪云价格图
 ├── profile/
 │   └── QX_Config.conf                 # 主配置文件
 ├── scripts/                           # 脚本配置（远程引用 Scripthub）
@@ -45,8 +47,8 @@ QuantumultX/
 开业限时活动：优惠券 `50OFF`，**全场 5 折**，截止 **7 月 9 日**。
 
 <p align="center">
-  <a href="https://imgchr.com/i/pmwg9FP">
-    <img src="https://s41.ax1x.com/2026/07/03/pmwg9FP.jpg" alt="吹雪云价格预览" width="520" />
+  <a href="assets/chuixue-price-list.jpg">
+    <img src="assets/chuixue-price-list.jpg" alt="吹雪云价格预览" width="520" />
   </a>
 </p>
 
@@ -188,4 +190,4 @@ QuantumultX/
 
 ---
 
-**最后更新**: 2026-07-03
+**最后更新**: 2026-07-14
