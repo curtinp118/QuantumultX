@@ -1,15 +1,5 @@
-# ===== AI Rules =====
-
-# ===== Apple Intelligence =====
-HOST-KEYWORD,apple-wit,no-policy
-HOST-SUFFIX,apple-cloudkit.com,no-policy
-HOST-SUFFIX,apple-livephotos.com,no-policy
-HOST,intelligence.apple.com,no-policy
-HOST,madservices.apple.com,no-policy
-HOST,guzzoni.apple.com,no-policy
-HOST,smoot.apple.com,no-policy
-HOST,api.apple-cloudkit.com,no-policy
-HOST,blackbird.apple.com,no-policy
+# ===== AI 分流规则 =====
+# 更新时间：2026-10-20
 
 # ===== 通用（AI 服务共用的基础设施） =====
 HOST,api.statsig.com,no-policy
@@ -51,6 +41,7 @@ HOST-SUFFIX,colab.google.com,no-policy
 HOST,copilot.microsoft.com,no-policy
 HOST-SUFFIX,edgeservices.bing.com,no-policy
 HOST-SUFFIX,bingapis.com,no-policy
+HOST-SUFFIX,copilotstudio.microsoft.com,no-policy
 HOST,www.bing.com,no-policy
 HOST,r.bing.com,no-policy
 HOST,sydney.bing.com,no-policy
@@ -88,10 +79,13 @@ HOST-SUFFIX,leonardo.ai,no-policy
 HOST-SUFFIX,runwayml.com,no-policy
 HOST-SUFFIX,lumalabs.ai,no-policy
 HOST-SUFFIX,pika.art,no-policy
-HOST-SUFFIX,klingai.com,no-policy
 HOST-SUFFIX,synthesia.io,no-policy
 HOST-SUFFIX,heygen.com,no-policy
 HOST-SUFFIX,d-id.com,no-policy
+HOST-SUFFIX,muse.ai,no-policy
+HOST-SUFFIX,kaiber.ai,no-policy
+HOST-SUFFIX,descript.com,no-policy
+HOST-SUFFIX,captions.ai,no-policy
 
 # ===== 语音 / 音乐 AI =====
 HOST-SUFFIX,elevenlabs.io,no-policy
@@ -103,8 +97,7 @@ HOST-SUFFIX,udio.com,no-policy
 # ===== GitHub Copilot =====
 HOST-SUFFIX,githubcopilot.com,no-policy
 HOST,api.githubcopilot.com,no-policy
-HOST,api.github.com,no-policy
-HOST,github.githubassets.com,no-policy
+HOST-SUFFIX,copilot-proxy.githubusercontent.com,no-policy
 
 # ===== 代码 / 开发 AI =====
 HOST-SUFFIX,cursor.sh,no-policy
@@ -115,6 +108,8 @@ HOST-SUFFIX,replit.com,no-policy
 HOST-SUFFIX,tabnine.com,no-policy
 HOST-SUFFIX,v0.dev,no-policy
 HOST-SUFFIX,bolt.new,no-policy
+HOST-SUFFIX,lovable.dev,no-policy
+HOST-SUFFIX,blackbox.ai,no-policy
 
 # ===== LLM 平台 / API =====
 HOST-SUFFIX,huggingface.co,no-policy
@@ -126,20 +121,61 @@ HOST-SUFFIX,cerebras.ai,no-policy
 HOST-SUFFIX,together.ai,no-policy
 HOST-SUFFIX,modal.com,no-policy
 HOST-SUFFIX,openrouter.ai,no-policy
+HOST-SUFFIX,fireworks.ai,no-policy
+HOST-SUFFIX,deepinfra.com,no-policy
+HOST-SUFFIX,deepgram.com,no-policy
+HOST-SUFFIX,ai21.com,no-policy
+HOST-SUFFIX,jina.ai,no-policy
+HOST-SUFFIX,voyageai.com,no-policy
+HOST-SUFFIX,fal.ai,no-policy
+HOST-SUFFIX,baseten.co,no-policy
+HOST-SUFFIX,lepton.ai,no-policy
+
+# ===== Amazon / IBM AI =====
+HOST-SUFFIX,bedrock.amazonaws.com,no-policy
+HOST-SUFFIX,watsonx.ai,no-policy
+HOST-SUFFIX,ml.cloud.ibm.com,no-policy
 
 # ===== 搜索 AI =====
 HOST-SUFFIX,you.com,no-policy
+HOST-SUFFIX,phind.com,no-policy
+HOST-SUFFIX,exa.ai,no-policy
+HOST-SUFFIX,komo.ai,no-policy
 
 # ===== 内容 / 写作 AI =====
 HOST-SUFFIX,jasper.ai,no-policy
 HOST-SUFFIX,copy.ai,no-policy
 HOST-SUFFIX,writesonic.com,no-policy
+HOST-SUFFIX,deepl.com,no-policy
+HOST-SUFFIX,deeplusercontent.com,no-policy
+HOST-SUFFIX,grammarly.com,no-policy
+HOST-SUFFIX,grammarly.io,no-policy
+HOST-SUFFIX,quillbot.com,no-policy
+
+# ===== 办公 / 知识管理 AI =====
+HOST-SUFFIX,notion.so,no-policy
+HOST-SUFFIX,notion.site,no-policy
+HOST-SUFFIX,notion-static.com,no-policy
+HOST-SUFFIX,slack.com,no-policy
+HOST-SUFFIX,atlassian.com,no-policy
+HOST-SUFFIX,linear.app,no-policy
+
+# ===== 会议 / 语音助手 =====
+HOST-SUFFIX,otter.ai,no-policy
+HOST-SUFFIX,fireflies.ai,no-policy
+HOST-SUFFIX,fathom.video,no-policy
+HOST-SUFFIX,granola.ai,no-policy
 
 # ===== 设计 AI =====
 HOST-SUFFIX,canva.com,no-policy
 HOST-SUFFIX,figma.com,no-policy
+HOST,firefly.adobe.com,no-policy
+HOST-SUFFIX,adobe.io,no-policy
+HOST-SUFFIX,krea.ai,no-policy
+HOST-SUFFIX,freepik.com,no-policy
 
 # ===== 其他 AI =====
 HOST-SUFFIX,dify.ai,no-policy
 HOST-SUFFIX,grazie.ai,no-policy
 HOST-SUFFIX,meta.ai,no-policy
+HOST-SUFFIX,pi.ai,no-policy
