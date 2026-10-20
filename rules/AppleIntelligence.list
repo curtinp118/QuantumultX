@@ -1,28 +1,13 @@
 # Apple Intelligence 规则集
 
-HOST-KEYWORD,apple-wit,no-policy
-HOST-SUFFIX,app-measurement.com,no-policy
-HOST-SUFFIX,apple-cloudkit.com,no-policy
-HOST-SUFFIX,apple-livephotos.com,no-policy
-HOST-SUFFIX,apple.com,no-policy
-HOST-SUFFIX,apple.com.cn,no-policy
-HOST-SUFFIX,icloud-content.com,no-policy
-HOST-SUFFIX,icloud.com,no-policy
-HOST-SUFFIX,icloud.com.cn,no-policy
-HOST-SUFFIX,itunes.apple.com,no-policy
-HOST-SUFFIX,me.com,no-policy
-HOST-SUFFIX,mzstatic.com,no-policy
-HOST,p67-keyvalueservice.icloud.com,no-policy
-HOST,api.apple-cloudkit.com,no-policy
-HOST,api.smoot.apple.com,no-policy
-HOST,binary-blob-repository.apple.com,no-policy
-HOST,guzzoni.apple.com,no-policy
-HOST,p106-keyvalueservice.icloud.com,no-policy
-HOST-SUFFIX,smoot.apple.com,no-policy
 HOST-SUFFIX,gateway.icloud.com,no-policy
 HOST-SUFFIX,apple-relay.apple.com,no-policy
 HOST-SUFFIX,apple-relay.fastly-edge.com,no-policy
 HOST-SUFFIX,apple-relay.cloudflare.com,no-policy
+HOST-SUFFIX,guzzoni.apple.com,no-policy
 HOST-SUFFIX,cp4.cloudflare.com,no-policy
+HOST-SUFFIX,gspe1-ssl.ls.apple.com,no-policy
+HOST-SUFFIX,smoot.apple.com,no-policy
 HOST-SUFFIX,apple-relay.akamaized.net,no-policy
 HOST-SUFFIX,apple-relay.mask.apple-dns.net,no-policy
+HOST-SUFFIX,api-siri-prod.apple.com,no-policy
