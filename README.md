@@ -13,30 +13,6 @@ Quantumult X 公开配置，主配置位于 [`profile/QX_Config.conf`](profile/Q
 
 
 
-## 🚀 机场推荐
-
-### 星链机场｜轻松注册 即领永久免费试用订阅
-
-<p align="center">
-  <a href="https://xship.2fa.cat/?7vYiIpE">
-    <img src="https://picui.ogmua.cn/s1/2026/08/22/6a89a85547aa5.webp" alt="高速|稳定|安全|省心" width="520" />
-  </a>
-</p>
-
-🔗 立即注册 [星链机场](https://xship.2fa.cat/?7vYiIpE)，低至高速|稳定|安全|省心，轻松注册 即领永久免费试用订阅 。
-
----
-
-### 其他可选
-> 建议先注册试用，按自己的地区、设备和流量需求选择。
-
-**吹雪云**｜低价大流量
-
-🔗 立即注册 [吹雪云](https://xn--9kqs1lo79d.com/#/register?code=hxevCvYa)，低至 **¥4 / 月**，大流量用户可优先考虑。
-
-**奈雪**｜可注册查看当前套餐与节点
-
-🔗 [点击注册](https://www.naixueyun.net/#/register?code=SDzhfUgs)
 ## 🚀 快速开始
 
 ### 1. 导入配置
