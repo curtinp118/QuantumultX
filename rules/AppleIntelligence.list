@@ -1,4 +1,6 @@
 # Apple Intelligence 规则集
+# 更新时间：2026-11-05
+# 补充来源：https://raw.githubusercontent.com/RocM301/Apple-Rule/refs/heads/main/Apple%20AI-New
 
 HOST-SUFFIX,gateway.icloud.com,no-policy
 HOST-SUFFIX,apple-relay.apple.com,no-policy
@@ -11,3 +13,10 @@ HOST-SUFFIX,smoot.apple.com,no-policy
 HOST-SUFFIX,apple-relay.akamaized.net,no-policy
 HOST-SUFFIX,apple-relay.mask.apple-dns.net,no-policy
 HOST-SUFFIX,api-siri-prod.apple.com,no-policy
+HOST,seed.siri.apple.com,no-policy
+HOST,mask-api.icloud.com,no-policy
+HOST,mask-api.fe2.apple-dns.net,no-policy
+HOST,apple-carry-relay.cloudflare.com,no-policy
+HOST,probe.icloud.com,no-policy
+HOST,metrics.icloud.com,no-policy
+HOST,wps.apple.com,no-policy
