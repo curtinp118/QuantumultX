@@ -9,8 +9,15 @@ Quantumult X 公开配置，主配置位于 [`profile/QX_Config.conf`](profile/Q
 | :---: | :---: |
 | <img src="https://cdn.jsdelivr.net/gh/curtinp118/QuantumultX@main/icons/home1.jpeg" width="360" /> | <img src="https://cdn.jsdelivr.net/gh/curtinp118/QuantumultX@main/icons/home2.jpeg" width="360" /> |
 
+## ✈️ 机场推荐（AFF 推广）
 
+### 星链
 
+提供免费订阅与多档付费套餐支持三网优化 IPLC 专线、多地区节点，以及流媒体、AI 网站和海外工具访问。
+
+[**🚀 前往星链 · 查看套餐与订阅**](https://xship.2fa.cat/?7vYiIpE)
+
+[![星链套餐介绍：畅爽追剧 ¥4/周、星链轻享 ¥12/月、星链优享 ¥18/月、星链尊享 ¥35/月，以及永久免费订阅](assets/aff-plans.png)](https://xship.2fa.cat/?7vYiIpE)
 
 
 ## 🚀 快速开始
@@ -156,4 +163,4 @@ Google 重定向及部分远程重写需要 MITM 证书：
 
 ---
 
-**最后更新**: 2026-09-05
+**最后更新**: 2026-11-08
